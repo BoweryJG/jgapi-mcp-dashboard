@@ -1,13 +1,20 @@
 # 🚀 MCP Dashboard Deployment Guide
 
-## Quick Setup & Deployment
+This guide explains how to deploy the MCP Dashboard to production using Netlify (frontend) and Render (backend).
 
-### 1. Initialize Git Repository
+## Prerequisites
+
+1. GitHub account with the code pushed to a repository
+2. Netlify account (free tier works)
+3. Render account (free tier works)
+
+## Step 1: Push to GitHub
+
 ```bash
 cd JGapiMCPDash
 git init
 git add .
-git commit -m "Initial commit: Award-winning MCP Dashboard"
+git commit -m "Initial commit: MCP Dashboard with real data"
 ```
 
 ### 2. Create GitHub Repository

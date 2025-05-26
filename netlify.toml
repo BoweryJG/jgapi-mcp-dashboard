@@ -1,10 +1,12 @@
 [build]
   publish = "frontend/build"
-  command = "cd frontend && npm run build"
+  command = "cd frontend && npm install && CI=false npm run build"
 
 [build.environment]
   NODE_VERSION = "18"
   NPM_VERSION = "9"
+  CI = "false"
+  REACT_APP_API_URL = "https://osbackend-zl1h.onrender.com/api"
 
 [[redirects]]
   from = "/api/*"

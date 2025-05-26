@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mcp-dashboard-backend
+    runtime: node
+    repo: https://github.com/YOUR_USERNAME/jgapi-mcp-dashboard # Update this
+    branch: main
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        value: https://mcp-dashboard.netlify.app # Update after Netlify deploy
+      - key: LOG_LEVEL
+        value: info
+    autoDeploy: false

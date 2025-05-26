@@ -12,7 +12,6 @@ import {
   Button,
   Chip,
   Alert,
-  Code,
   Paper,
   Tab,
   Tabs,
@@ -532,8 +531,8 @@ claude-code setup-pipeline \\
       "command": "vault-connector",
       "args": ["--secure"],
       "env": {
-        "VAULT_ADDR": "${VAULT_ADDR}",
-        "VAULT_TOKEN": "${VAULT_TOKEN}"
+        "VAULT_ADDR": "\${VAULT_ADDR}",
+        "VAULT_TOKEN": "\${VAULT_TOKEN}"
       }
     }
   }

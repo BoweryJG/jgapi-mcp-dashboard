@@ -25,6 +25,7 @@ const io = new Server(server, {
 });
 
 const PORT = process.env.PORT || 5000;
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 // Middleware
 app.use(helmet());
@@ -33,7 +34,9 @@ app.use(morgan('combined', {
   stream: { write: (message) => logger.info(message.trim()) }
 }));
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  origin: IS_PRODUCTION 
+    ? process.env.FRONTEND_URL 
+    : ["http://localhost:3000", "http://localhost:3001"],
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));

@@ -16,6 +16,8 @@ import {
   Badge,
   Tooltip,
   Divider,
+  ToggleButton,
+  ToggleButtonGroup,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -29,9 +31,12 @@ import {
   Info as InfoIcon,
   GitHub as GitHubIcon,
   Notifications as NotificationsIcon,
+  Storage as StorageIcon,
+  Api as ApiIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme as useAppTheme } from '../App';
+import { useDataSource } from '../contexts/DataSourceContext';
 
 const drawerWidth = 280;
 
@@ -54,6 +59,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const theme = useTheme();
   const { isDarkMode, toggleTheme } = useAppTheme();
+  const { dataSource, setDataSource } = useDataSource();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleDrawerToggle = () => {
@@ -163,6 +169,32 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             {menuItems.find(item => item.path === location.pathname)?.text || 'Dashboard'}
           </Typography>
+
+          {/* Data Source Toggle */}
+          <ToggleButtonGroup
+            value={dataSource}
+            exclusive
+            onChange={(e, value) => value && setDataSource(value)}
+            size="small"
+            sx={{ mr: 2 }}
+          >
+            <ToggleButton value="mcp" aria-label="MCP servers">
+              <Tooltip title="MCP Servers">
+                <StorageIcon sx={{ mr: 0.5 }} />
+              </Tooltip>
+              <Typography variant="body2" sx={{ display: { xs: 'none', sm: 'inline' } }}>
+                MCP
+              </Typography>
+            </ToggleButton>
+            <ToggleButton value="api" aria-label="API services">
+              <Tooltip title="API Services">
+                <ApiIcon sx={{ mr: 0.5 }} />
+              </Tooltip>
+              <Typography variant="body2" sx={{ display: { xs: 'none', sm: 'inline' } }}>
+                API
+              </Typography>
+            </ToggleButton>
+          </ToggleButtonGroup>
 
           {/* Real-time indicator */}
           <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>

@@ -1,11 +1,22 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import { serverAPI, analyticsAPI, QueryParams } from '../services/api';
+import { serverAPI, analyticsAPI, QueryParams, ServerRanking } from '../services/api';
+import { useDataSource } from '../contexts/DataSourceContext';
 
 // Custom hook for top servers
 export const useTopServers = (params: QueryParams = {}) => {
+  const { dataSource } = useDataSource();
+  
   return useQuery({
-    queryKey: ['topServers', params],
-    queryFn: () => serverAPI.getTopServers(params),
+    queryKey: ['topServers', params, dataSource],
+    queryFn: async () => {
+      // Pass the data source type to the API
+      const response = await serverAPI.getTopServers({
+        ...params,
+        type: dataSource
+      } as any);
+      
+      return response;
+    },
     staleTime: 5 * 60 * 1000, // 5 minutes
     refetchInterval: 30 * 1000, // Refetch every 30 seconds for live data
   });
@@ -13,9 +24,18 @@ export const useTopServers = (params: QueryParams = {}) => {
 
 // Custom hook for fastest growing servers
 export const useFastestGrowing = (params: QueryParams = {}) => {
+  const { dataSource } = useDataSource();
+  
   return useQuery({
-    queryKey: ['fastestGrowing', params],
-    queryFn: () => serverAPI.getFastestGrowing(params),
+    queryKey: ['fastestGrowing', params, dataSource],
+    queryFn: async () => {
+      const response = await serverAPI.getFastestGrowing({
+        ...params,
+        type: dataSource
+      } as any);
+      
+      return response;
+    },
     staleTime: 5 * 60 * 1000,
     refetchInterval: 30 * 1000,
   });
@@ -23,9 +43,18 @@ export const useFastestGrowing = (params: QueryParams = {}) => {
 
 // Custom hook for most downloaded servers
 export const useMostDownloaded = (params: QueryParams = {}) => {
+  const { dataSource } = useDataSource();
+  
   return useQuery({
-    queryKey: ['mostDownloaded', params],
-    queryFn: () => serverAPI.getMostDownloaded(params),
+    queryKey: ['mostDownloaded', params, dataSource],
+    queryFn: async () => {
+      const response = await serverAPI.getMostDownloaded({
+        ...params,
+        type: dataSource
+      } as any);
+      
+      return response;
+    },
     staleTime: 5 * 60 * 1000,
     refetchInterval: 30 * 1000,
   });
@@ -33,9 +62,18 @@ export const useMostDownloaded = (params: QueryParams = {}) => {
 
 // Custom hook for most reviewed servers
 export const useMostReviewed = (params: QueryParams = {}) => {
+  const { dataSource } = useDataSource();
+  
   return useQuery({
-    queryKey: ['mostReviewed', params],
-    queryFn: () => serverAPI.getMostReviewed(params),
+    queryKey: ['mostReviewed', params, dataSource],
+    queryFn: async () => {
+      const response = await serverAPI.getMostReviewed({
+        ...params,
+        type: dataSource
+      } as any);
+      
+      return response;
+    },
     staleTime: 5 * 60 * 1000,
     refetchInterval: 30 * 1000,
   });
@@ -102,6 +140,7 @@ export const useInfiniteServers = (endpoint: 'top' | 'fastest-growing' | 'most-d
   return useInfiniteQuery({
     queryKey: ['infiniteServers', endpoint, params],
     queryFn: ({ pageParam = 1 }) => getServersFn({ ...params, page: pageParam }),
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       const { pagination } = lastPage;
       if (pagination && pagination.page < pagination.pages) {
