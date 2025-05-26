@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import theme, { darkTheme } from './theme';
 import Layout from './components/Layout';
@@ -36,8 +36,7 @@ function App() {
         <CssBaseline />
         <Router>
           <Layout>
-            <AnimatePresence mode="wait">
-              <Routes>
+            <Routes>
                 <Route path="/" element={
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -119,7 +118,6 @@ function App() {
                   </motion.div>
                 } />
               </Routes>
-            </AnimatePresence>
           </Layout>
         </Router>
       </ThemeProvider>
