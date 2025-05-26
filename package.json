@@ -1,0 +1,52 @@
+{
+  "name": "jgapi-mcp-dashboard",
+  "version": "1.0.0",
+  "description": "Award-winning dashboard for MCP server rankings and analytics",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "cd frontend && npm test",
+    "test:backend": "cd backend && npm test",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && npm run lint",
+    "deploy": "npm run deploy:frontend && npm run deploy:backend",
+    "deploy:frontend": "cd frontend && npm run build && netlify deploy --prod",
+    "deploy:backend": "cd backend && git push render main",
+    "postinstall": "npm install --prefix frontend && npm install --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "netlify-cli": "^17.15.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/jgapi-mcp-dashboard.git"
+  },
+  "keywords": [
+    "mcp",
+    "dashboard",
+    "react",
+    "material-ui",
+    "analytics",
+    "real-time",
+    "claude",
+    "model-context-protocol"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
