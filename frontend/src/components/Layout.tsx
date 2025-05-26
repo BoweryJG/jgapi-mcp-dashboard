@@ -25,7 +25,7 @@ import {
   Star as StarIcon,
   LightMode,
   DarkMode,
-  Integration as IntegrationIcon,
+  Api as IntegrationIcon,
   Info as InfoIcon,
   GitHub as GitHubIcon,
   Notifications as NotificationsIcon,
