@@ -27,7 +27,7 @@ import {
   Update,
   BugReport,
   Code,
-  Documentation,
+  MenuBook,
 } from '@mui/icons-material';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { motion } from 'framer-motion';
@@ -189,7 +189,7 @@ const ServerDetails: React.FC = () => {
                   <Button variant="outlined" startIcon={<GitHub />}>
                     View Source
                   </Button>
-                  <Button variant="outlined" startIcon={<Documentation />}>
+                  <Button variant="outlined" startIcon={<MenuBook />}>
                     Documentation
                   </Button>
                 </Box>
